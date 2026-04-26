@@ -17,6 +17,16 @@ class PayeesVC: HeaderTitleViewController {
     
     private func configureUI() {
         
+        
+        
+        NSLayoutConstraint.activate([
+            
+        ])
+        
     }
 
+}
+
+#Preview {
+    PayeesVC()
 }

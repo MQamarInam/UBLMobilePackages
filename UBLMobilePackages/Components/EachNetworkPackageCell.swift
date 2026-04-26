@@ -69,6 +69,7 @@ class EachNetworkPackageCell: UITableViewCell {
         headerView.translatesAutoresizingMaskIntoConstraints = false
         headerView.backgroundColor = .orange.withAlphaComponent(0.8)
         headerView.layer.cornerRadius = 20
+        
         durationBtn.setImage(UIImage(named: "person"), for: .normal)
         subscribeBtn.setImage(UIImage(named: "person"), for: .normal)
 

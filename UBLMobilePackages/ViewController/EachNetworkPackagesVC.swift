@@ -9,6 +9,13 @@ import UIKit
 
 class EachNetworkPackagesVC: HeaderTitleViewController {
     
+    private let segmentedControl: UISegmentedControl = {
+        let segmentedControl = UISegmentedControl(items: ["All", "7 Days", "15 Days", "30 Days"])
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        return segmentedControl
+    }()
+    
     private let myTable: UITableView = {
         let myTable = UITableView()
         myTable.rowHeight = 295
@@ -33,14 +40,32 @@ class EachNetworkPackagesVC: HeaderTitleViewController {
     }
     
     func configureUI() {
+        
         view.addSubview(myTable)
+        view.addSubview(segmentedControl)
+    
+        segmentedControl.addTarget(self, action: #selector(segmentChanged), for: .valueChanged)
         
         NSLayoutConstraint.activate([
-            myTable.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: 25),
+            
+            segmentedControl.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: 25),
+            segmentedControl.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            segmentedControl.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            segmentedControl.heightAnchor.constraint(equalToConstant: 40),
+            
+            myTable.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 25),
             myTable.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
             myTable.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
             myTable.bottomAnchor.constraint(equalTo: view .bottomAnchor),
+            
         ])
+    }
+    
+    @objc func segmentChanged(_ sender: UISegmentedControl) {
+        
+        vm.filterArray(selectedIndex: sender.selectedSegmentIndex)
+        myTable.reloadData()
+        
     }
 
 }
@@ -52,14 +77,14 @@ class EachNetworkPackagesVC: HeaderTitleViewController {
 extension EachNetworkPackagesVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        vm.networkPackagesArray.count
+        vm.filteredArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = myTable.dequeueReusableCell(withIdentifier: EachNetworkPackageCell.identifier, for: indexPath) as? EachNetworkPackageCell else {
             fatalError("Error while dequeue the custom cell...")
         }
-        var item = vm.networkPackagesArray[indexPath.row]
+        var item = vm.filteredArray[indexPath.row]
         
         var dataLbl = "Data"
         var onNetLbl = "OnNet Min"
@@ -83,7 +108,7 @@ extension EachNetworkPackagesVC: UITableViewDelegate, UITableViewDataSource {
             smsLbl = ""
         }
         
-        let includedItems = "\(item.data ?? ""), \(item.onNetMin ?? "") Min, \(item.otherMin ?? "") Other, \(item.sms ?? "") SMS"
+        let includedItems = "\(item.data ?? "") \(item.onNetMin ?? "") \(onNetLbl.first ?? ",") \(item.otherMin ?? "") \(onNetLbl.first ?? " ") \(item.sms ?? "") \(onNetLbl.first ?? " ")"
         
         cell.setupLbl(dataLbl: dataLbl, onNetMinLbl: onNetLbl, otherMin: OtherLbl, smsLbl: smsLbl)
         
