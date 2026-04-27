@@ -29,6 +29,7 @@ class NetworksListVC: HeaderTitleViewController {
         myTable.dataSource = self
         myTable.delegate = self
         myTable.rowHeight = 100
+        myTable.showsVerticalScrollIndicator = false
         myTable.separatorStyle = .none
     }
     
@@ -43,6 +44,10 @@ class NetworksListVC: HeaderTitleViewController {
         ])
     }
 
+}
+
+#Preview {
+    NetworksListVC()
 }
 
 extension NetworksListVC: UITableViewDelegate, UITableViewDataSource {
@@ -71,8 +76,4 @@ extension NetworksListVC: UITableViewDelegate, UITableViewDataSource {
         myTable.deselectRow(at: indexPath, animated: true)
     }
     
-}
-
-#Preview {
-    NetworksListVC()
 }

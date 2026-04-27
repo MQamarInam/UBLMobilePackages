@@ -37,6 +37,8 @@ class EachNetworkPackagesVC: HeaderTitleViewController {
         myTable.delegate = self
         myTable.separatorStyle = .none
         myTable.showsVerticalScrollIndicator = false
+        
+        vm.filterArray(selectedIndex: 0, selectedNetwork: self.titleShown ?? "")
     }
     
     func configureUI() {
@@ -63,7 +65,7 @@ class EachNetworkPackagesVC: HeaderTitleViewController {
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         
-        vm.filterArray(selectedIndex: sender.selectedSegmentIndex)
+        vm.filterArray(selectedIndex: sender.selectedSegmentIndex, selectedNetwork: self.titleShown ?? "")
         myTable.reloadData()
         
     }
@@ -91,24 +93,33 @@ extension EachNetworkPackagesVC: UITableViewDelegate, UITableViewDataSource {
         var OtherLbl = "Other Min"
         var smsLbl = "SMS"
         
+        var includedDataLbl = ", "
+        var includedOnNetLbl = "OnNet, "
+        var includedOtherLbl = "Other, "
+        var includedSmsLbl = "SMS"
+        
         if item.data == "0" {
             item.data = ""
             dataLbl = ""
+            includedDataLbl = ""
         }
         if item.onNetMin == "0" {
             item.onNetMin = ""
             onNetLbl = ""
+            includedOnNetLbl = ""
         }
         if item.otherMin == "0" {
             item.otherMin = ""
             OtherLbl = ""
+            includedOtherLbl = ""
         }
         if item.sms == "0" {
             item.sms = ""
             smsLbl = ""
+            includedSmsLbl = ""
         }
         
-        let includedItems = "\(item.data ?? "") \(item.onNetMin ?? "") \(onNetLbl.first ?? ",") \(item.otherMin ?? "") \(onNetLbl.first ?? " ") \(item.sms ?? "") \(onNetLbl.first ?? " ")"
+        let includedItems = "\(item.data ?? "") \(includedDataLbl) \(item.onNetMin ?? "") \(includedOnNetLbl) \(item.otherMin ?? "") \(includedOtherLbl) \(item.sms ?? "") \(includedSmsLbl)"
         
         cell.setupLbl(dataLbl: dataLbl, onNetMinLbl: onNetLbl, otherMin: OtherLbl, smsLbl: smsLbl)
         
@@ -118,8 +129,9 @@ extension EachNetworkPackagesVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = vm.filteredArray[indexPath.row]
         let vc = PayeesVC()
-        
+        vc.packageModel = item
         navigationController?.pushViewController(vc, animated: true)
         myTable.deselectRow(at: indexPath, animated: true)
     }

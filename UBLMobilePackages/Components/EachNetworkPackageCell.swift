@@ -9,6 +9,8 @@ import UIKit
 
 class EachNetworkPackageCell: UITableViewCell {
     
+    let gradientLayer = CAGradientLayer()
+    
     private var packageTitle = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .bold), color: .white, mytext: "Super Ganta", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
     private var durationBtn = GenericButton(bgColor: .systemRed, tintClr: .white, title: "1 Hour", titleImg: UIImage(systemName: "clock")!, imageSize: 0, labelFont: .systemFont(ofSize: 16, weight: .semibold), cornrRadius: 20)
     private var subscribeBtn = GenericButton(bgColor: .black, tintClr: .white, title: "Subscribe", titleImg: UIImage(systemName: "clock")!, imageSize: 0, labelFont: .systemFont(ofSize: 16, weight: .semibold), cornrRadius: 18)
@@ -30,16 +32,30 @@ class EachNetworkPackageCell: UITableViewCell {
     private let headerView = UIView()
     private let packageContentView = UIView()
     private let amountSection = UIView()
-    
+
     static let identifier = "myIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        gradientLayer.colors = [
+            UIColor.orange.withAlphaComponent(0.7).cgColor,
+            UIColor.systemPink.withAlphaComponent(0.7).cgColor,
+            UIColor.systemPink.withAlphaComponent(0.7).cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint   = CGPoint(x: 1, y: 1)
+        headerView.layer.insertSublayer(gradientLayer, at: 0)
         configureUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        gradientLayer.frame = headerView.bounds
+        gradientLayer.cornerRadius = 20
     }
     
     private func configureUI() {
@@ -67,7 +83,6 @@ class EachNetworkPackageCell: UITableViewCell {
         amountSection.addSubview(subscribeBtn)
         
         headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.backgroundColor = .orange.withAlphaComponent(0.8)
         headerView.layer.cornerRadius = 20
         
         durationBtn.setImage(UIImage(named: "person"), for: .normal)

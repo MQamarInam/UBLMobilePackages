@@ -10,6 +10,6 @@ import Foundation
 struct PayeesModel {
     
     var payeeName: String
-    var number: Double
+    var number: String
     
 }
