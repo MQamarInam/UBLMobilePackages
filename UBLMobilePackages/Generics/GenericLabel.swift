@@ -13,7 +13,7 @@ class GenericLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(myfont: UIFont, color: UIColor, mytext: String, myNumberOfLines: Int, clickable: Bool, txtAlignment: NSTextAlignment) {
+    init(myfont: UIFont, color: UIColor, backgroundClr: UIColor, mytext: String, myNumberOfLines: Int, clickable: Bool, txtAlignment: NSTextAlignment, cornerRadius: CGFloat) {
         super.init(frame: .zero)
         font = myfont
         textColor = color
@@ -22,6 +22,9 @@ class GenericLabel: UILabel {
         lineBreakMode = .byWordWrapping
         numberOfLines = myNumberOfLines
         isUserInteractionEnabled = clickable
+        backgroundColor = backgroundClr
+        layer.cornerRadius = cornerRadius
+        clipsToBounds = true
         translatesAutoresizingMaskIntoConstraints = false
     }
 

@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         
-        let navigation = UINavigationController(rootViewController: MobilePaymentsVC())
+        let navigation = UINavigationController(rootViewController: MobilePaymentsViewController())
         window?.rootViewController = navigation
         
         window?.windowScene = windowScene

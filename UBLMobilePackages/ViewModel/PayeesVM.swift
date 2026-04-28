@@ -9,7 +9,7 @@ import Foundation
 
 class PayeesVM {
     
-    var PayeesArray: [PayeesModel] = [
+    var payeesArray: [PayeesModel] = [
         PayeesModel(payeeName: "Qamar", number: "03080044493"),
         PayeesModel(payeeName: "Irshad", number: "03034343938"),
         PayeesModel(payeeName: "Mohsin", number: "03004545476"),
@@ -18,14 +18,5 @@ class PayeesVM {
         PayeesModel(payeeName: "zain", number: "03006767793"),
         PayeesModel(payeeName: "irfan", number: "030000476774")
     ]
-    
-    func getInitials(from name: String) -> String {
-        let formatter = PersonNameComponentsFormatter()
-        if let components = formatter.personNameComponents(from: name) {
-            formatter.style = .abbreviated
-            return formatter.string(from: components)
-        }
-        return ""
-    }
     
 }

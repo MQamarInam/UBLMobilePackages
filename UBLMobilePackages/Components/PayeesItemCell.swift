@@ -9,12 +9,12 @@ import UIKit
 
 class PayeesItemCell: UITableViewCell {
 
-    private let myImage = GenericImage(imageName: UIImage(systemName: "chevron.right")!, contntMode: .scaleAspectFit, tintClr: .systemBlue, bgColor: .clear, cornrRadius: 1)
-    private var initials = GenericLabel(myfont: .systemFont(ofSize: 35, weight: .medium), color: .black, mytext: "QI", myNumberOfLines: 1, clickable: false, txtAlignment: .center)
-    private let myTitle = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, mytext: "Qamar", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let myNumber = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .regular), color: .black, mytext: "03080044493", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let myNetworkType = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, mytext: "Jazz", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let myView = UIView()
+    private let navigationIcon = GenericImage(imageName: UIImage(systemName: "chevron.right")!, contntMode: .scaleAspectFit, tintClr: .systemBlue, bgColor: .clear, cornrRadius: 1)
+    private var payeeInitials = GenericLabel(myfont: .systemFont(ofSize: 35, weight: .medium), color: .black, backgroundClr: .clear, mytext: "QI", myNumberOfLines: 1, clickable: false, txtAlignment: .center, cornerRadius: 0)
+    private let payeeName = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "Qamar", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let payeeNumber = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .regular), color: .black, backgroundClr: .clear, mytext: "03080044493", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let payeeNetworkType = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, backgroundClr: .clear, mytext: "Jazz", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let payeeContentView = UIView()
     
     static let identifier = "myIdentifier"
     
@@ -29,58 +29,58 @@ class PayeesItemCell: UITableViewCell {
     
     private func configureUI() {
         
-        contentView.addSubview(myView)
+        contentView.addSubview(payeeContentView)
         
-        myView.addSubview(myImage)
-        myView.addSubview(initials)
-        myView.addSubview(myTitle)
-        myView.addSubview(myNumber)
-        myView.addSubview(myNetworkType)
+        payeeContentView.addSubview(navigationIcon)
+        payeeContentView.addSubview(payeeInitials)
+        payeeContentView.addSubview(payeeName)
+        payeeContentView.addSubview(payeeNumber)
+        payeeContentView.addSubview(payeeNetworkType)
         
-        initials.backgroundColor = .gray.withAlphaComponent(0.3)
-        initials.layer.cornerRadius = 30
-        initials.clipsToBounds = true
+        payeeInitials.backgroundColor = .gray.withAlphaComponent(0.3)
+        payeeInitials.layer.cornerRadius = 30
+        payeeInitials.clipsToBounds = true
         
-        myView.backgroundColor = .gray.withAlphaComponent(0.1)
-        myView.translatesAutoresizingMaskIntoConstraints = false
-        myView.layer.cornerRadius = 20
+        payeeContentView.backgroundColor = .gray.withAlphaComponent(0.1)
+        payeeContentView.translatesAutoresizingMaskIntoConstraints = false
+        payeeContentView.layer.cornerRadius = 20
         
         contentView.backgroundColor = .clear
         
         NSLayoutConstraint.activate([
             
-            myView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            myView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            myView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            myView.heightAnchor.constraint(equalToConstant: 100),
+            payeeContentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            payeeContentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            payeeContentView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            payeeContentView.heightAnchor.constraint(equalToConstant: 100),
             
-            initials.centerYAnchor.constraint(equalTo: myView.centerYAnchor),
-            initials.leadingAnchor.constraint(equalTo: myView.leadingAnchor, constant: 20),
-            initials.widthAnchor.constraint(equalToConstant: 60),
-            initials.heightAnchor.constraint(equalToConstant: 60),
+            payeeInitials.centerYAnchor.constraint(equalTo: payeeContentView.centerYAnchor),
+            payeeInitials.leadingAnchor.constraint(equalTo: payeeContentView.leadingAnchor, constant: 20),
+            payeeInitials.widthAnchor.constraint(equalToConstant: 60),
+            payeeInitials.heightAnchor.constraint(equalToConstant: 60),
             
-            myTitle.bottomAnchor.constraint(equalTo: myNumber.topAnchor, constant: -2),
-            myTitle.leadingAnchor.constraint(equalTo: initials.trailingAnchor, constant: 20),
+            payeeName.bottomAnchor.constraint(equalTo: payeeNumber.topAnchor, constant: -2),
+            payeeName.leadingAnchor.constraint(equalTo: payeeInitials.trailingAnchor, constant: 20),
             
-            myNumber.centerYAnchor.constraint(equalTo: myView.centerYAnchor),
-            myNumber.leadingAnchor.constraint(equalTo: initials.trailingAnchor, constant: 20),
+            payeeNumber.centerYAnchor.constraint(equalTo: payeeContentView.centerYAnchor),
+            payeeNumber.leadingAnchor.constraint(equalTo: payeeInitials.trailingAnchor, constant: 20),
             
-            myNetworkType.topAnchor.constraint(equalTo: myNumber.bottomAnchor, constant: 2),
-            myNetworkType.leadingAnchor.constraint(equalTo: initials.trailingAnchor, constant: 20),
+            payeeNetworkType.topAnchor.constraint(equalTo: payeeNumber.bottomAnchor, constant: 2),
+            payeeNetworkType.leadingAnchor.constraint(equalTo: payeeInitials.trailingAnchor, constant: 20),
             
-            myImage.centerYAnchor.constraint(equalTo: myView.centerYAnchor),
-            myImage.trailingAnchor.constraint(equalTo: myView.trailingAnchor, constant: -15),
-            myImage.widthAnchor.constraint(equalToConstant: 18),
-            myImage.heightAnchor.constraint(equalToConstant: 18),
+            navigationIcon.centerYAnchor.constraint(equalTo: payeeContentView.centerYAnchor),
+            navigationIcon.trailingAnchor.constraint(equalTo: payeeContentView.trailingAnchor, constant: -15),
+            navigationIcon.widthAnchor.constraint(equalToConstant: 18),
+            navigationIcon.heightAnchor.constraint(equalToConstant: 18),
             
         ])
     }
     
-    func setupCell(initials: String, title: String, number: String, networkType: String) {
-        self.initials.text = initials
-        myTitle.text = title
-        myNumber.text = number
-        myNetworkType.text = networkType
+    func setupPayeeCell(title: String, number: String, networkType: String) {
+        self.payeeInitials.text = title.getInitials()
+        payeeName.text = title
+        payeeNumber.text = number
+        payeeNetworkType.text = networkType
     }
 
 }

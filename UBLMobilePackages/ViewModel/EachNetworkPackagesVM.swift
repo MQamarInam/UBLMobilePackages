@@ -12,16 +12,16 @@ class EachNetworkPackagesVM {
     let networkPackagesArray: [NetworkPackageModel] = [
         NetworkPackageModel(networkType: "Jazz", title: "Student Bundle", duration: "15 Days", data: "15 GB", onNetMin: "500", otherMin: "100", sms: "1000", amount: "1000"),
         NetworkPackageModel(networkType: "Jazz", title: "Monthly Premium", duration: "30 Days", data: "50 GB", onNetMin: "0", otherMin: "0", sms: "1000", amount: "2500"),
-        NetworkPackageModel(networkType: "Ufone", title: "Super", duration: "7 Days", data: "5 GB", onNetMin: "1000", otherMin: "100", sms: "0", amount: "2000"),
+        NetworkPackageModel(networkType: "Ufone", title: "Ufone Super", duration: "7 Days", data: "5 GB", onNetMin: "1000", otherMin: "100", sms: "0", amount: "2000"),
         NetworkPackageModel(networkType: "Jazz", title: "Weekly Offer", duration: "7 Days", data: "0", onNetMin: "500", otherMin: "50", sms: "1000", amount: "1500"),
-        NetworkPackageModel(networkType: "Ufone", title: "Super", duration: "15 Days", data: "15 GB", onNetMin: "2000", otherMin: "0", sms: "0", amount: "2100"),
-        NetworkPackageModel(networkType: "Ufone", title: "Super", duration: "30 Days", data: "25 GB", onNetMin: "5000", otherMin: "200", sms: "1000", amount: "2800"),
+        NetworkPackageModel(networkType: "Ufone", title: "Ufone Premium", duration: "15 Days", data: "15 GB", onNetMin: "2000", otherMin: "0", sms: "0", amount: "2100"),
+        NetworkPackageModel(networkType: "Ufone", title: "Monthly Ufone", duration: "30 Days", data: "25 GB", onNetMin: "5000", otherMin: "200", sms: "1000", amount: "2800"),
     ]
     
-    var filteredArray: [NetworkPackageModel] = []
+    var filteredNetworkPackages: [NetworkPackageModel] = []
     
-    func filterArray(selectedIndex: Int, selectedNetwork: String) {
-        filteredArray = networkPackagesArray.filter { item in
+    func filterNetworkPackages(selectedIndex: Int, selectedNetwork: String) {
+        filteredNetworkPackages = networkPackagesArray.filter { item in
             if item.networkType != selectedNetwork {
                 return false
             }

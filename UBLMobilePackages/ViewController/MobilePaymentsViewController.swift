@@ -6,12 +6,11 @@
 
 import UIKit
 
-class MobilePaymentsVC: HeaderTitleViewController {
+class MobilePaymentsViewController: HeaderTitleViewController {
     
-    private let collectionView: UICollectionView = {
+    private let paymentTypesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.register(PaymentsItemCell.self, forCellWithReuseIdentifier: PaymentsItemCell.identifier)
         collectionView.allowsSelection = true
@@ -20,60 +19,58 @@ class MobilePaymentsVC: HeaderTitleViewController {
         return collectionView
     }()
     
-    private let vc = MobilePaymentsVM()
+    private let vm = MobilePaymentsVM()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        collectionView.dataSource = self
-        collectionView.delegate = self
     }
     
     private func configureUI() {
+        view.addSubview(paymentTypesCollectionView)
+        paymentTypesCollectionView.dataSource = self
+        paymentTypesCollectionView.delegate = self
         
-        view.addSubview(collectionView)
-
         NSLayoutConstraint.activate([
             
-            collectionView.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: 25),
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            paymentTypesCollectionView.topAnchor.constraint(equalTo: titleLbl.bottomAnchor, constant: 25),
+            paymentTypesCollectionView.leadingAnchor.constraint(equalTo: view.layoutMarginsGuide.leadingAnchor),
+            paymentTypesCollectionView.trailingAnchor.constraint(equalTo: view.layoutMarginsGuide.trailingAnchor),
+            paymentTypesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
         ])
-        
     }
 
 }
 
 #Preview {
-    MobilePaymentsVC()
+    MobilePaymentsViewController()
 }
 
-extension MobilePaymentsVC: UICollectionViewDataSource, UICollectionViewDelegate {
+extension MobilePaymentsViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return vc.mobilePaymentsArray.count
+        return vm.mobilePaymentsArray.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PaymentsItemCell.identifier, for: indexPath) as! PaymentsItemCell
-        
-        let item = vc.mobilePaymentsArray[indexPath.row]
-        cell.itemCell(
+        let item = vm.mobilePaymentsArray[indexPath.row]
+        cell.setupPaymentCell(
             image: item.image,
             title: item.title
         )
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = vc.mobilePaymentsArray[indexPath.row]
-        let vc = NetworksListVC()
-        vc.titleShown = item.title
+        let item = vm.mobilePaymentsArray[indexPath.row]
+        let vc = NetworksListViewController(title: item.title)
         navigationController?.pushViewController(vc, animated: true)
         collectionView.deselectItem(at: indexPath, animated: true)
     }
+    
 }
 
-extension MobilePaymentsVC: UICollectionViewDelegateFlowLayout {
+extension MobilePaymentsViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let size = (view.frame.width / 2) - 24
@@ -84,9 +81,6 @@ extension MobilePaymentsVC: UICollectionViewDelegateFlowLayout {
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 2
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
     
 }

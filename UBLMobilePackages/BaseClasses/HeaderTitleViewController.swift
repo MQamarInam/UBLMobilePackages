@@ -9,7 +9,7 @@ import UIKit
 
 class HeaderTitleViewController: NavBarViewController {
 
-    var titleLbl = GenericLabel(myfont: .systemFont(ofSize: 36, weight: .bold), color: .black, mytext: "Mobile Payments", myNumberOfLines: 2, clickable: false, txtAlignment: .left)
+    var titleLbl = GenericLabel(myfont: .systemFont(ofSize: 36, weight: .bold), color: .black, backgroundClr: .clear, mytext: "Mobile Payments", myNumberOfLines: 2, clickable: false, txtAlignment: .left, cornerRadius: 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()

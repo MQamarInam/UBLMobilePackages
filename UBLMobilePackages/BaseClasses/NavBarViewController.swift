@@ -9,13 +9,17 @@ import UIKit
 
 class NavBarViewController: BaseViewController {
     
-    let contentView = UIView()
+    let contentView: UIView = {
+        let contentView = UIView()
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
     
-    private let profileBtn = GenericButton(bgColor: .gray.withAlphaComponent(0.1), tintClr: .black, title: "", titleImg: UIImage(systemName: "person")!, imageSize: 20, labelFont: .systemFont(ofSize: 10, weight: .medium), cornrRadius: 19)
+    private let profileBtn = GenericButton(bgColor: .gray.withAlphaComponent(0.1), tintClr: .black, title: "", imageSize: 20, labelFont: .systemFont(ofSize: 10, weight: .medium), cornrRadius: 19)
     
-    private let searchBtn = GenericButton(bgColor: .gray.withAlphaComponent(0.1), tintClr: .black, title: "", titleImg: UIImage(systemName: "magnifyingglass")!, imageSize: 18, labelFont: .systemFont(ofSize: 10, weight: .medium), cornrRadius: 19)
+    private let searchBtn = GenericButton(bgColor: .gray.withAlphaComponent(0.1), tintClr: .black, title: "", imageSize: 18, labelFont: .systemFont(ofSize: 10, weight: .medium), cornrRadius: 19)
     
-    private let backBtn = GenericButton(bgColor: .clear, tintClr: .systemBlue, title: "", titleImg: UIImage(systemName: "arrow.left")!, imageSize: 18, labelFont: .systemFont(ofSize: 10, weight: .medium), cornrRadius: 1)
+    private let backBtn = GenericButton(bgColor: .clear, tintClr: .systemBlue, title: "", imageSize: 18, labelFont: .systemFont(ofSize: 10, weight: .medium), cornrRadius: 1)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +34,13 @@ class NavBarViewController: BaseViewController {
         contentView.addSubview(backBtn)
         backBtn.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        let config = UIImage.SymbolConfiguration(pointSize: 18, weight: .regular)
+        profileBtn.tintColor = .black
+        profileBtn.setImage(UIImage(systemName: "person")!.withConfiguration(config), for: .normal)
+        searchBtn.tintColor = .black
+        searchBtn.setImage(UIImage(systemName: "magnifyingglass")!.withConfiguration(config), for: .normal)
+        backBtn.tintColor = .systemBlue
+        backBtn.setImage(UIImage(systemName: "arrow.left")!.withConfiguration(config), for: .normal)
         
         NSLayoutConstraint.activate([
             

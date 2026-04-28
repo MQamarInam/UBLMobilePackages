@@ -9,9 +9,9 @@ import UIKit
 
 class PaymentsItemCell: UICollectionViewCell {
     
-    private let itemImage = GenericImage(imageName: UIImage(systemName: "phone")!, contntMode: .scaleAspectFit, tintClr: .systemBlue, bgColor: .clear, cornrRadius: 1)
+    private let paymentItemImage = GenericImage(imageName: UIImage(systemName: "phone")!, contntMode: .scaleAspectFit, tintClr: .systemBlue, bgColor: .clear, cornrRadius: 1)
 
-    private let itemLbl = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .medium), color: .gray, mytext: "Afef", myNumberOfLines: 0, clickable: false, txtAlignment: .center)
+    private let paymentItemLbl = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .medium), color: .gray, backgroundClr: .clear, mytext: "Afef", myNumberOfLines: 0, clickable: false, txtAlignment: .center, cornerRadius: 0)
     
     static let identifier = "cellIdentifier"
     
@@ -26,8 +26,8 @@ class PaymentsItemCell: UICollectionViewCell {
     
     private func setupUI() {
         
-        contentView.addSubview(itemImage)
-        contentView.addSubview(itemLbl)
+        contentView.addSubview(paymentItemImage)
+        contentView.addSubview(paymentItemLbl)
         
         contentView.backgroundColor = .gray.withAlphaComponent(0.1)
         
@@ -35,23 +35,22 @@ class PaymentsItemCell: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             
-            itemImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            itemImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -20),
-            itemImage.heightAnchor.constraint(equalToConstant: 40),
-            itemImage.widthAnchor.constraint(equalToConstant: 36),
+            paymentItemImage.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            paymentItemImage.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: -20),
+            paymentItemImage.heightAnchor.constraint(equalToConstant: 40),
+            paymentItemImage.widthAnchor.constraint(equalToConstant: 36),
 
-            itemLbl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            itemLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-            itemLbl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 20),
-            itemLbl.heightAnchor.constraint(equalToConstant: 36),
+            paymentItemLbl.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            paymentItemLbl.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
+            paymentItemLbl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor, constant: 20),
+            paymentItemLbl.heightAnchor.constraint(equalToConstant: 36),
             
         ])
     }
         
-    func itemCell(image: UIImage, title: String) {
-        self.itemImage.image = image
-        self.itemLbl.text = title
-        self.setupUI()
+    func setupPaymentCell(image: UIImage, title: String) {
+        self.paymentItemImage.image = image
+        self.paymentItemLbl.text = title
     }
     
 }

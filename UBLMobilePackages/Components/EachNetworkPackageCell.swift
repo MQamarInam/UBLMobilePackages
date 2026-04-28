@@ -11,40 +11,52 @@ class EachNetworkPackageCell: UITableViewCell {
     
     let gradientLayer = CAGradientLayer()
     
-    private var packageTitle = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .bold), color: .white, mytext: "Super Ganta", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private var durationBtn = GenericButton(bgColor: .systemRed, tintClr: .white, title: "1 Hour", titleImg: UIImage(systemName: "clock")!, imageSize: 0, labelFont: .systemFont(ofSize: 16, weight: .semibold), cornrRadius: 20)
-    private var subscribeBtn = GenericButton(bgColor: .black, tintClr: .white, title: "Subscribe", titleImg: UIImage(systemName: "clock")!, imageSize: 0, labelFont: .systemFont(ofSize: 16, weight: .semibold), cornrRadius: 18)
+    private var mobilePackageTitle = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .bold), color: .white, backgroundClr: .clear, mytext: "Super Ganta", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private var packageValidityLbl = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .semibold), color: .white, backgroundClr: .clear, mytext: "5 Days", myNumberOfLines: 1, clickable: false, txtAlignment: .center, cornerRadius: 20)
+    private var packageSubscribeBtn = GenericButton(bgColor: .black, tintClr: .white,title: "Subscribe", imageSize: 0, labelFont: .systemFont(ofSize: 16, weight: .semibold), cornrRadius: 18)
     
-    private let dataLbl = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, mytext: "Data", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private var dataValue = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, mytext: "1 GB", myNumberOfLines: 1, clickable: false, txtAlignment: .center)
-    private let onNetMinsLbl = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, mytext: "On Net Min", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private var onNetMinsValue = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, mytext: "5000", myNumberOfLines: 1, clickable: false, txtAlignment: .center)
-    private let otherMinsLbl = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, mytext: "Other Min", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private var otherMinsValue = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, mytext: "500", myNumberOfLines: 1, clickable: false, txtAlignment: .center)
-    private let smsLbl = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, mytext: "SMS", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private var smsValue = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, mytext: "1000", myNumberOfLines: 1, clickable: false, txtAlignment: .center)
+    private let packageDateLbl = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, backgroundClr: .clear, mytext: "Data", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private var packageDataValue = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "1 GB", myNumberOfLines: 1, clickable: false, txtAlignment: .center, cornerRadius: 0)
+    private let packageOnNetMinLbl = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, backgroundClr: .clear, mytext: "On Net Min", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private var packageOnNetMinValue = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "5000", myNumberOfLines: 1, clickable: false, txtAlignment: .center, cornerRadius: 0)
+    private let packageOtherMinLbl = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, backgroundClr: .clear, mytext: "Other Min", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private var packageOtherMinValue = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "500", myNumberOfLines: 1, clickable: false, txtAlignment: .center, cornerRadius: 0)
+    private let PackageSmsLbl = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, backgroundClr: .clear, mytext: "SMS", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private var packageSmsValue = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "1000", myNumberOfLines: 1, clickable: false, txtAlignment: .center, cornerRadius: 0)
     
-    private let packageIncludesLbl = GenericLabel(myfont: .systemFont(ofSize: 15, weight: .medium), color: .gray, mytext: "Package Includes", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private var packageIncludesValue = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, mytext: "1 GB, 500 SMS", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let amountLbl = GenericLabel(myfont: .systemFont(ofSize: 15, weight: .medium), color: .gray, mytext: "Amount", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private var amountValue = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, mytext: "Rs 500", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
+    private let packageIncludesLbl = GenericLabel(myfont: .systemFont(ofSize: 15, weight: .medium), color: .gray, backgroundClr: .clear, mytext: "Package Includes", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private var packageIncludesValue = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, backgroundClr: .clear, mytext: "1 GB, 500 SMS", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let packagePriceLbl = GenericLabel(myfont: .systemFont(ofSize: 15, weight: .medium), color: .gray, backgroundClr: .clear, mytext: "Amount", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private var packagePriceValue = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "Rs 500", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
     
-    private let headerView = UIView()
-    private let packageContentView = UIView()
-    private let amountSection = UIView()
+    private let packageItemHeaderView: UIView = {
+        let headerView = UIView()
+        headerView.layer.cornerRadius = 20
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+        return headerView
+    }()
+    
+    private let packageItemContentView: UIView = {
+        let contentView = UIView()
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 20
+        contentView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+    
+    private let amountSection: UIView = {
+        let amountSection = UIView()
+        amountSection.backgroundColor = .gray.withAlphaComponent(0.1)
+        amountSection.layer.cornerRadius = 12
+        amountSection.translatesAutoresizingMaskIntoConstraints = false
+        return amountSection
+    }()
 
     static let identifier = "myIdentifier"
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        gradientLayer.colors = [
-            UIColor.orange.withAlphaComponent(0.7).cgColor,
-            UIColor.systemPink.withAlphaComponent(0.7).cgColor,
-            UIColor.systemPink.withAlphaComponent(0.7).cgColor
-        ]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint   = CGPoint(x: 1, y: 1)
-        headerView.layer.insertSublayer(gradientLayer, at: 0)
         configureUI()
     }
     
@@ -54,140 +66,138 @@ class EachNetworkPackageCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        gradientLayer.frame = headerView.bounds
+        gradientLayer.frame = packageItemHeaderView.bounds
         gradientLayer.cornerRadius = 20
     }
     
     private func configureUI() {
         
-        contentView.addSubview(headerView)
-        headerView.addSubview(packageContentView)
-        headerView.addSubview(packageTitle)
-        headerView.addSubview(durationBtn)
-        packageContentView.addSubview(amountSection)
+        contentView.addSubview(packageItemHeaderView)
+        packageItemHeaderView.addSubview(packageItemContentView)
+        packageItemHeaderView.addSubview(mobilePackageTitle)
+        packageItemHeaderView.addSubview(packageValidityLbl)
         
-        packageContentView.addSubview(dataLbl)
-        packageContentView.addSubview(dataValue)
-        packageContentView.addSubview(onNetMinsLbl)
-        packageContentView.addSubview(onNetMinsValue)
-        packageContentView.addSubview(otherMinsLbl)
-        packageContentView.addSubview(otherMinsValue)
-        packageContentView.addSubview(smsLbl)
-        packageContentView.addSubview(smsValue)
+        packageItemContentView.addSubview(amountSection)
+        packageItemContentView.addSubview(packageDateLbl)
+        packageItemContentView.addSubview(packageDataValue)
+        packageItemContentView.addSubview(packageOnNetMinLbl)
+        packageItemContentView.addSubview(packageOnNetMinValue)
+        packageItemContentView.addSubview(packageOtherMinLbl)
+        packageItemContentView.addSubview(packageOtherMinValue)
+        packageItemContentView.addSubview(PackageSmsLbl)
+        packageItemContentView.addSubview(packageSmsValue)
+        packageItemContentView.addSubview(packageIncludesLbl)
+        packageItemContentView.addSubview(packageIncludesValue)
         
-        packageContentView.addSubview(packageIncludesLbl)
-        packageContentView.addSubview(packageIncludesValue)
+        gradientLayer.colors = [
+            UIColor.orange.withAlphaComponent(0.7).cgColor,
+            UIColor.systemPink.withAlphaComponent(0.7).cgColor,
+            UIColor.systemPink.withAlphaComponent(0.7).cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint   = CGPoint(x: 1, y: 1)
+        packageItemHeaderView.layer.insertSublayer(gradientLayer, at: 0)
         
-        amountSection.addSubview(amountLbl)
-        amountSection.addSubview(amountValue)
-        amountSection.addSubview(subscribeBtn)
+        amountSection.addSubview(packagePriceLbl)
+        amountSection.addSubview(packagePriceValue)
+        amountSection.addSubview(packageSubscribeBtn)
         
-        headerView.translatesAutoresizingMaskIntoConstraints = false
-        headerView.layer.cornerRadius = 20
+        packageSubscribeBtn.setImage(UIImage(named: "person"), for: .normal)
         
-        durationBtn.setImage(UIImage(named: "person"), for: .normal)
-        subscribeBtn.setImage(UIImage(named: "person"), for: .normal)
-
-        packageContentView.translatesAutoresizingMaskIntoConstraints = false
-        amountSection.translatesAutoresizingMaskIntoConstraints = false
-        amountSection.backgroundColor = .gray.withAlphaComponent(0.1)
-        amountSection.layer.cornerRadius = 12
-        packageContentView.backgroundColor = .white
-        packageContentView.layer.cornerRadius = 20
-        packageContentView.layer.maskedCorners = [.layerMaxXMaxYCorner, .layerMinXMaxYCorner]
+        packageValidityLbl.backgroundColor = .red
         
         NSLayoutConstraint.activate([
             
             contentView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             contentView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            headerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            headerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            headerView.heightAnchor.constraint(equalToConstant: 280),
+            packageItemHeaderView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            packageItemHeaderView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            packageItemHeaderView.heightAnchor.constraint(equalToConstant: 280),
             
-            packageTitle.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 22),
-            packageTitle.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 30),
+            mobilePackageTitle.topAnchor.constraint(equalTo: packageItemHeaderView.topAnchor, constant: 22),
+            mobilePackageTitle.leadingAnchor.constraint(equalTo: packageItemHeaderView.leadingAnchor, constant: 30),
             
-            durationBtn.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 18),
-            durationBtn.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -30),
-            durationBtn.heightAnchor.constraint(equalToConstant: 40),
-            durationBtn.widthAnchor.constraint(equalToConstant: 80),
+            packageValidityLbl.topAnchor.constraint(equalTo: packageItemHeaderView.topAnchor, constant: 18),
+            packageValidityLbl.trailingAnchor.constraint(equalTo: packageItemHeaderView.trailingAnchor, constant: -30),
+            packageValidityLbl.heightAnchor.constraint(equalToConstant: 40),
+            packageValidityLbl.widthAnchor.constraint(equalToConstant: 80),
             
-            packageContentView.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 1),
-            packageContentView.trailingAnchor.constraint(equalTo: headerView.trailingAnchor, constant: -1),
-            packageContentView.bottomAnchor.constraint(equalTo: headerView.bottomAnchor, constant: -1),
-            packageContentView.heightAnchor.constraint(equalToConstant: 207),
+            packageItemContentView.leadingAnchor.constraint(equalTo: packageItemHeaderView.leadingAnchor, constant: 1),
+            packageItemContentView.trailingAnchor.constraint(equalTo: packageItemHeaderView.trailingAnchor, constant: -1),
+            packageItemContentView.bottomAnchor.constraint(equalTo: packageItemHeaderView.bottomAnchor, constant: -1),
+            packageItemContentView.heightAnchor.constraint(equalToConstant: 207),
             
-            dataLbl.topAnchor.constraint(equalTo: packageContentView.topAnchor, constant: 16),
-            dataLbl.leadingAnchor.constraint(equalTo: packageContentView.leadingAnchor, constant: 16),
+            packageDateLbl.topAnchor.constraint(equalTo: packageItemContentView.topAnchor, constant: 16),
+            packageDateLbl.leadingAnchor.constraint(equalTo: packageItemContentView.leadingAnchor, constant: 16),
             
-            onNetMinsLbl.topAnchor.constraint(equalTo: packageContentView.topAnchor, constant: 16),
-            onNetMinsLbl.leadingAnchor.constraint(equalTo: dataLbl.trailingAnchor, constant: 35),
+            packageOnNetMinLbl.topAnchor.constraint(equalTo: packageItemContentView.topAnchor, constant: 16),
+            packageOnNetMinLbl.leadingAnchor.constraint(equalTo: packageDateLbl.trailingAnchor, constant: 35),
             
-            otherMinsLbl.topAnchor.constraint(equalTo: packageContentView.topAnchor, constant: 16),
-            otherMinsLbl.leadingAnchor.constraint(equalTo: onNetMinsLbl.trailingAnchor, constant: 30),
+            packageOtherMinLbl.topAnchor.constraint(equalTo: packageItemContentView.topAnchor, constant: 16),
+            packageOtherMinLbl.leadingAnchor.constraint(equalTo: packageOnNetMinLbl.trailingAnchor, constant: 30),
             
-            smsLbl.topAnchor.constraint(equalTo: packageContentView.topAnchor, constant: 16),
-            smsLbl.leadingAnchor.constraint(equalTo: otherMinsLbl.trailingAnchor, constant: 30),
+            PackageSmsLbl.topAnchor.constraint(equalTo: packageItemContentView.topAnchor, constant: 16),
+            PackageSmsLbl.leadingAnchor.constraint(equalTo: packageOtherMinLbl.trailingAnchor, constant: 30),
             
-            dataValue.topAnchor.constraint(equalTo: dataLbl.bottomAnchor, constant: 2),
-            dataValue.leadingAnchor.constraint(equalTo: dataLbl.leadingAnchor),
+            packageDataValue.topAnchor.constraint(equalTo: packageDateLbl.bottomAnchor, constant: 2),
+            packageDataValue.leadingAnchor.constraint(equalTo: packageDateLbl.leadingAnchor),
             
-            onNetMinsValue.topAnchor.constraint(equalTo: onNetMinsLbl.bottomAnchor, constant: 2),
-            onNetMinsValue.leadingAnchor.constraint(equalTo: onNetMinsLbl.leadingAnchor),
+            packageOnNetMinValue.topAnchor.constraint(equalTo: packageOnNetMinLbl.bottomAnchor, constant: 2),
+            packageOnNetMinValue.leadingAnchor.constraint(equalTo: packageOnNetMinLbl.leadingAnchor),
             
-            otherMinsValue.topAnchor.constraint(equalTo: otherMinsLbl.bottomAnchor, constant: 2),
-            otherMinsValue.leadingAnchor.constraint(equalTo: otherMinsLbl.leadingAnchor),
+            packageOtherMinValue.topAnchor.constraint(equalTo: packageOtherMinLbl.bottomAnchor, constant: 2),
+            packageOtherMinValue.leadingAnchor.constraint(equalTo: packageOtherMinLbl.leadingAnchor),
             
-            smsValue.topAnchor.constraint(equalTo: smsLbl.bottomAnchor, constant: 2),
-            smsValue.leadingAnchor.constraint(equalTo: smsLbl.leadingAnchor),
+            packageSmsValue.topAnchor.constraint(equalTo: PackageSmsLbl.bottomAnchor, constant: 2),
+            packageSmsValue.leadingAnchor.constraint(equalTo: PackageSmsLbl.leadingAnchor),
             
-            packageIncludesLbl.topAnchor.constraint(equalTo: packageContentView.topAnchor, constant: 70),
-            packageIncludesLbl.leadingAnchor.constraint(equalTo: packageContentView.leadingAnchor, constant: 16),
+            packageIncludesLbl.topAnchor.constraint(equalTo: packageItemContentView.topAnchor, constant: 70),
+            packageIncludesLbl.leadingAnchor.constraint(equalTo: packageItemContentView.leadingAnchor, constant: 16),
             
             packageIncludesValue.topAnchor.constraint(equalTo: packageIncludesLbl.bottomAnchor, constant: 2),
-            packageIncludesValue.leadingAnchor.constraint(equalTo: packageContentView.leadingAnchor, constant: 16),
+            packageIncludesValue.leadingAnchor.constraint(equalTo: packageItemContentView.leadingAnchor, constant: 16),
             
             amountSection.topAnchor.constraint(equalTo: packageIncludesValue.bottomAnchor, constant: 20),
-            amountSection.leadingAnchor.constraint(equalTo: packageContentView.leadingAnchor, constant: 18),
-            amountSection.trailingAnchor.constraint(equalTo: packageContentView.trailingAnchor, constant: -18),
+            amountSection.leadingAnchor.constraint(equalTo: packageItemContentView.leadingAnchor, constant: 18),
+            amountSection.trailingAnchor.constraint(equalTo: packageItemContentView.trailingAnchor, constant: -18),
             amountSection.heightAnchor.constraint(equalToConstant: 60),
             
-            amountLbl.centerYAnchor.constraint(equalTo: amountSection.centerYAnchor, constant: -10),
-            amountLbl.leadingAnchor.constraint(equalTo: amountSection.leadingAnchor, constant: 18),
+            packagePriceLbl.centerYAnchor.constraint(equalTo: amountSection.centerYAnchor, constant: -10),
+            packagePriceLbl.leadingAnchor.constraint(equalTo: amountSection.leadingAnchor, constant: 18),
             
-            amountValue.centerYAnchor.constraint(equalTo: amountSection.centerYAnchor, constant: 10),
-            amountValue.leadingAnchor.constraint(equalTo: amountSection.leadingAnchor, constant: 18),
+            packagePriceValue.centerYAnchor.constraint(equalTo: amountSection.centerYAnchor, constant: 10),
+            packagePriceValue.leadingAnchor.constraint(equalTo: amountSection.leadingAnchor, constant: 18),
             
-            subscribeBtn.centerYAnchor.constraint(equalTo: amountSection.centerYAnchor),
-            subscribeBtn.trailingAnchor.constraint(equalTo: amountSection.trailingAnchor, constant: -16),
-            subscribeBtn.heightAnchor.constraint(equalToConstant: 34),
-            subscribeBtn.widthAnchor.constraint(equalToConstant: 110)
+            packageSubscribeBtn.centerYAnchor.constraint(equalTo: amountSection.centerYAnchor),
+            packageSubscribeBtn.trailingAnchor.constraint(equalTo: amountSection.trailingAnchor, constant: -16),
+            packageSubscribeBtn.heightAnchor.constraint(equalToConstant: 34),
+            packageSubscribeBtn.widthAnchor.constraint(equalToConstant: 110)
 
         ])
         
     }
 
-    func setupCell(networkType: String, title: String, duration: String, data: String, OnNetMin: String, otherMin: String, sms: String, amount: String, includedValues: String) {
-        packageTitle.text = title
-        durationBtn.setTitle(duration, for: .normal)
-        dataValue.text = data
-        onNetMinsValue.text = String(OnNetMin)
-        otherMinsValue.text = String(otherMin)
-        smsValue.text = String(sms)
-        amountValue.text = String(amount)
+    func setupPackageCell(networkType: String, title: String, duration: String, data: String, OnNetMin: String, otherMin: String, sms: String, amount: String, includedValues: String) {
+        mobilePackageTitle.text = title
+        packageValidityLbl.text = duration
+        packageDataValue.text = data
+        packageOnNetMinValue.text = String(OnNetMin)
+        packageOtherMinValue.text = String(otherMin)
+        packageSmsValue.text = String(sms)
+        packagePriceValue.text = String(amount)
         packageIncludesValue.text = includedValues
     }
     
     func setupLbl(dataLbl: String, onNetMinLbl: String, otherMin: String, smsLbl: String) {
-        self.dataLbl.text = dataLbl
-        self.onNetMinsLbl.text = onNetMinLbl
-        self.otherMinsLbl.text = otherMin
-        self.smsLbl.text = smsLbl
+        self.packageDateLbl.text = dataLbl
+        self.packageOnNetMinLbl.text = onNetMinLbl
+        self.packageOtherMinLbl.text = otherMin
+        self.PackageSmsLbl.text = smsLbl
     }
 
 }
 
 #Preview {
-    EachNetworkPackagesVC()
+    AllPackagesViewController()
 }

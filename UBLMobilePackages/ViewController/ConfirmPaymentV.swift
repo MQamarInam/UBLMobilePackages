@@ -9,36 +9,43 @@ import UIKit
 
 class ConfirmPaymentV: UIView {
     
-    private let contentView = UIView()
-
-    private let dismissSheetBtn = GenericButton(bgColor: .gray.withAlphaComponent(0.3), tintClr: .black, title: "", titleImg: UIImage(systemName: "xmark")!, imageSize: 14, labelFont: .systemFont(ofSize: 18), cornrRadius: 15)
-    private let confirmImage = GenericButton(bgColor: .green, tintClr: .white, title: "", titleImg: UIImage(systemName: "checkmark")!, imageSize: 16, labelFont: .systemFont(ofSize: 20), cornrRadius: 25)
-    private let paymentSucessfullLbl = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .semibold), color: .black, mytext: "Payment Sucessful", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let amountSentLbl = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, mytext: "Amount Sent", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let amountLbl = GenericLabel(myfont: .systemFont(ofSize: 30, weight: .bold), color: .black, mytext: "Rs. 500", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let transactionHistoryLbl = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .regular), color: .gray, mytext: "Check your payment's status in Transaction History", myNumberOfLines: 2, clickable: false, txtAlignment: .center)
-    private let dateLbl = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .regular), color: .black, mytext: "12-12-2013", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let paidToLbl = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, mytext: "Paid To", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let payeeName = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .semibold), color: .black, mytext: "Qamar", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let payeeNumber = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, mytext: "0300000000", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let paidFromLbl = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, mytext: "Paid From", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let senderName = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .semibold), color: .black, mytext: "Qamar", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let senderId = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, mytext: "0300000000", myNumberOfLines: 1, clickable: false, txtAlignment: .left)
-    private let shareButton = GenericButton(bgColor: .gray.withAlphaComponent(0.2), tintClr: .blue, title: " Share", titleImg: UIImage(systemName: "arrow.up")!, imageSize: 0, labelFont: .systemFont(ofSize: 16, weight: .semibold), cornrRadius: 20)
-
-    var payeesModel: PayeesModel?
-    var packageModel: NetworkPackageModel?
-    
-    override init(frame: CGRect) {
-        super.init(frame: .zero)
-        
-        dismissSheetBtn.addTarget(self, action: #selector(dismissSheetClicked), for: .touchUpInside)
-        self.backgroundColor = .darkGray
-        
-        self.addSubview(contentView)
+    private let contentView: UIView = {
+        let contentView = UIView()
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 20
         contentView.translatesAutoresizingMaskIntoConstraints = false
+        return contentView
+    }()
+
+    private let dismissSheetBtn = GenericButton(bgColor: .gray.withAlphaComponent(0.3), tintClr: .black, title: "", imageSize: 14, labelFont: .systemFont(ofSize: 18), cornrRadius: 15)
+    private let confirmImage = GenericButton(bgColor: .green, tintClr: .white, title: "", imageSize: 16, labelFont: .systemFont(ofSize: 20), cornrRadius: 25)
+    private let paymentSucessfullLbl = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "Payment Sucessful", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let amountSentLbl = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, backgroundClr: .clear, mytext: "Amount Sent", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let amountLbl = GenericLabel(myfont: .systemFont(ofSize: 30, weight: .bold), color: .black, backgroundClr: .clear, mytext: "Rs. 500", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let transactionHistoryLbl = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .regular), color: .gray, backgroundClr: .clear, mytext: "Check your payment's status in Transaction History", myNumberOfLines: 2, clickable: false, txtAlignment: .center, cornerRadius: 0)
+    private let dateLbl = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .regular), color: .black, backgroundClr: .clear, mytext: "12-12-2013", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let paidToLbl = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, backgroundClr: .clear, mytext: "Paid To", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let payeeName = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "Qamar", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let payeeNumber = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, backgroundClr: .clear, mytext: "0300000000", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let paidFromLbl = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, backgroundClr: .clear, mytext: "Paid From", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let senderName = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "Qamar", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let senderAcountNumber = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, backgroundClr: .clear, mytext: "0300000000", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
+    private let shareButton = GenericButton(bgColor: .gray.withAlphaComponent(0.2), tintClr: .blue, title: " Share", imageSize: 0, labelFont: .systemFont(ofSize: 16, weight: .semibold), cornrRadius: 20)
+    
+    var navigateToRoot: (() -> Void)?
+    
+    init(amount: String, name: String, number: String) {
+        
+        super.init(frame: .zero)
+        
+        self.amountLbl.text = amount
+        self.payeeName.text = name
+        self.payeeNumber.text = number
+        
+        dismissSheetBtn.addTarget(self, action: #selector(dismissSheetClicked), for: .touchUpInside)
+        self.backgroundColor = .darkGray.withAlphaComponent(0.95)
+        
+        self.addSubview(contentView)
         
         contentView.addSubview(confirmImage)
         contentView.addSubview(paymentSucessfullLbl)
@@ -51,29 +58,28 @@ class ConfirmPaymentV: UIView {
         contentView.addSubview(payeeNumber)
         contentView.addSubview(paidFromLbl)
         contentView.addSubview(senderName)
-        contentView.addSubview(senderId)
+        contentView.addSubview(senderAcountNumber)
         contentView.addSubview(shareButton)
         
         contentView.addSubview(dismissSheetBtn)
-        
         shareButton.setTitleColor(.black, for: .normal)
         
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateStyle = .medium
-        
         self.dateLbl.text = formatter.string(from: date)
         
-        amountLbl.text = packageModel?.amount
-        payeeName.text = payeesModel?.payeeName
-        payeeNumber.text = payeesModel?.number
+        dismissSheetBtn.setImage(UIImage(systemName: "xmark"), for: .normal)
+        dismissSheetBtn.tintColor = .black
+        confirmImage.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        confirmImage.tintColor = .white
         
         NSLayoutConstraint.activate([
             
             contentView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
             contentView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -10),
             contentView.bottomAnchor.constraint(equalTo: self.layoutMarginsGuide.bottomAnchor),
-            contentView.heightAnchor.constraint(equalToConstant: 530),
+            contentView.heightAnchor.constraint(equalToConstant: 590),
             
             dismissSheetBtn.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             dismissSheetBtn.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
@@ -116,11 +122,11 @@ class ConfirmPaymentV: UIView {
             senderName.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             senderName.topAnchor.constraint(equalTo: paidFromLbl.bottomAnchor, constant: 4),
             
-            senderId.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            senderId.topAnchor.constraint(equalTo: senderName.bottomAnchor, constant: 5),
+            senderAcountNumber.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            senderAcountNumber.topAnchor.constraint(equalTo: senderName.bottomAnchor, constant: 5),
 
             shareButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            shareButton.topAnchor.constraint(equalTo: senderId.bottomAnchor, constant: 15),
+            shareButton.topAnchor.constraint(equalTo: senderAcountNumber.bottomAnchor, constant: 15),
             shareButton.heightAnchor.constraint(equalToConstant: 40),
             shareButton.widthAnchor.constraint(equalToConstant: 100),
             
@@ -133,7 +139,7 @@ class ConfirmPaymentV: UIView {
     }
     
     @objc private func dismissSheetClicked() {
-//        self.dismiss(animated: true)
+        navigateToRoot?()
     }
     
 }
