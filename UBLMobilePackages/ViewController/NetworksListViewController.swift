@@ -10,17 +10,17 @@ import UIKit
 class NetworksListViewController: HeaderTitleViewController {
 
     private let companiesTableView: UITableView = {
-        let myTable = UITableView()
-        myTable.allowsSelection = true
-        myTable.register(NetworkItemCell.self, forCellReuseIdentifier: NetworkItemCell.identifier)
-        myTable.rowHeight = 100
-        myTable.showsVerticalScrollIndicator = false
-        myTable.separatorStyle = .none
-        myTable.translatesAutoresizingMaskIntoConstraints = false
-        return myTable
+        let companiesTableView = UITableView()
+        companiesTableView.allowsSelection = true
+        companiesTableView.register(NetworkItemCell.self, forCellReuseIdentifier: NetworkItemCell.identifier)
+        companiesTableView.rowHeight = 100
+        companiesTableView.showsVerticalScrollIndicator = false
+        companiesTableView.separatorStyle = .none
+        companiesTableView.translatesAutoresizingMaskIntoConstraints = false
+        return companiesTableView
     }()
     
-    private let vm = NetworksListVM()
+    private let vm = NetworksListViewModel()
     
     var headerTitleLbl: String?
     init(title: String? = nil) {

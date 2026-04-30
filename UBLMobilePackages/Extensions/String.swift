@@ -17,3 +17,11 @@ extension String {
         return ""
     }
 }
+
+extension String {
+    func getDateInString(style: DateFormatter.Style) -> String? {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        return formatter.string(from: Date())
+    }
+}

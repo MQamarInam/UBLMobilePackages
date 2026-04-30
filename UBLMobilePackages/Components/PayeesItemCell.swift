@@ -8,13 +8,25 @@
 import UIKit
 
 class PayeesItemCell: UITableViewCell {
-
+    
+    private var payeeInitials: GenericLabel = {
+        let payeeInitials = GenericLabel(myfont: .systemFont(ofSize: 35, weight: .medium), color: .black, backgroundClr: .clear, mytext: "QI", myNumberOfLines: 1, clickable: false, txtAlignment: .center, cornerRadius: 0)
+        payeeInitials.backgroundColor = .gray.withAlphaComponent(0.3)
+        payeeInitials.layer.cornerRadius = 30
+        payeeInitials.clipsToBounds = true
+        return payeeInitials
+    }()
     private let navigationIcon = GenericImage(imageName: UIImage(systemName: "chevron.right")!, contntMode: .scaleAspectFit, tintClr: .systemBlue, bgColor: .clear, cornrRadius: 1)
-    private var payeeInitials = GenericLabel(myfont: .systemFont(ofSize: 35, weight: .medium), color: .black, backgroundClr: .clear, mytext: "QI", myNumberOfLines: 1, clickable: false, txtAlignment: .center, cornerRadius: 0)
     private let payeeName = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "Qamar", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
     private let payeeNumber = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .regular), color: .black, backgroundClr: .clear, mytext: "03080044493", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
     private let payeeNetworkType = GenericLabel(myfont: .systemFont(ofSize: 14, weight: .medium), color: .gray, backgroundClr: .clear, mytext: "Jazz", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
-    private let payeeContentView = UIView()
+    private let payeeContentView: UIView = {
+        let payeeContentView = UIView()
+        payeeContentView.backgroundColor = .gray.withAlphaComponent(0.1)
+        payeeContentView.translatesAutoresizingMaskIntoConstraints = false
+        payeeContentView.layer.cornerRadius = 20
+        return payeeContentView
+    }()
     
     static let identifier = "myIdentifier"
     
@@ -30,22 +42,11 @@ class PayeesItemCell: UITableViewCell {
     private func configureUI() {
         
         contentView.addSubview(payeeContentView)
-        
         payeeContentView.addSubview(navigationIcon)
         payeeContentView.addSubview(payeeInitials)
         payeeContentView.addSubview(payeeName)
         payeeContentView.addSubview(payeeNumber)
         payeeContentView.addSubview(payeeNetworkType)
-        
-        payeeInitials.backgroundColor = .gray.withAlphaComponent(0.3)
-        payeeInitials.layer.cornerRadius = 30
-        payeeInitials.clipsToBounds = true
-        
-        payeeContentView.backgroundColor = .gray.withAlphaComponent(0.1)
-        payeeContentView.translatesAutoresizingMaskIntoConstraints = false
-        payeeContentView.layer.cornerRadius = 20
-        
-        contentView.backgroundColor = .clear
         
         NSLayoutConstraint.activate([
             

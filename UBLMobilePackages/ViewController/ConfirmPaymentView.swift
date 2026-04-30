@@ -7,8 +7,9 @@
 
 import UIKit
 
-class ConfirmPaymentV: UIView {
+class ConfirmPaymentView: UIView {
     
+//    MARK: UISection
     private let contentView: UIView = {
         let contentView = UIView()
         contentView.backgroundColor = .white
@@ -16,9 +17,19 @@ class ConfirmPaymentV: UIView {
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
-
-    private let dismissSheetBtn = GenericButton(bgColor: .gray.withAlphaComponent(0.3), tintClr: .black, title: "", imageSize: 14, labelFont: .systemFont(ofSize: 18), cornrRadius: 15)
-    private let confirmImage = GenericButton(bgColor: .green, tintClr: .white, title: "", imageSize: 16, labelFont: .systemFont(ofSize: 20), cornrRadius: 25)
+    private let dismissSheetBtn: GenericButton = {
+        let dismissSheetBtn = GenericButton(bgColor: .gray.withAlphaComponent(0.3), tintClr: .black, title: "", imageSize: 14, labelFont: .systemFont(ofSize: 18), cornrRadius: 15)
+        dismissSheetBtn.setImage(UIImage(systemName: "xmark"), for: .normal)
+        dismissSheetBtn.tintColor = .black
+        dismissSheetBtn.addTarget(self, action: #selector(dismissSheetClicked), for: .touchUpInside)
+        return dismissSheetBtn
+    }()
+    private let confirmImage: GenericButton = {
+        let confirmImage = GenericButton(bgColor: .green, tintClr: .white, title: "", imageSize: 16, labelFont: .systemFont(ofSize: 20), cornrRadius: 25)
+        confirmImage.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        confirmImage.tintColor = .white
+        return confirmImage
+    }()
     private let paymentSucessfullLbl = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "Payment Sucessful", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
     private let amountSentLbl = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, backgroundClr: .clear, mytext: "Amount Sent", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
     private let amountLbl = GenericLabel(myfont: .systemFont(ofSize: 30, weight: .bold), color: .black, backgroundClr: .clear, mytext: "Rs. 500", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
@@ -30,23 +41,23 @@ class ConfirmPaymentV: UIView {
     private let paidFromLbl = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, backgroundClr: .clear, mytext: "Paid From", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
     private let senderName = GenericLabel(myfont: .systemFont(ofSize: 24, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "Qamar", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
     private let senderAcountNumber = GenericLabel(myfont: .systemFont(ofSize: 18, weight: .regular), color: .gray, backgroundClr: .clear, mytext: "0300000000", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
-    private let shareButton = GenericButton(bgColor: .gray.withAlphaComponent(0.2), tintClr: .blue, title: " Share", imageSize: 0, labelFont: .systemFont(ofSize: 16, weight: .semibold), cornrRadius: 20)
+    private let shareButton: GenericButton = {
+        let shareButton = GenericButton(bgColor: .gray.withAlphaComponent(0.2), tintClr: .blue, title: " Share", imageSize: 0, labelFont: .systemFont(ofSize: 16, weight: .semibold), cornrRadius: 20)
+        shareButton.setTitleColor(.black, for: .normal)
+        return shareButton
+    }()
     
     var navigateToRoot: (() -> Void)?
     
+//    MARK: Init
     init(amount: String, name: String, number: String) {
-        
         super.init(frame: .zero)
-        
         self.amountLbl.text = amount
         self.payeeName.text = name
         self.payeeNumber.text = number
-        
-        dismissSheetBtn.addTarget(self, action: #selector(dismissSheetClicked), for: .touchUpInside)
-        self.backgroundColor = .darkGray.withAlphaComponent(0.95)
+        self.backgroundColor = .darkGray.withAlphaComponent(0.98)
         
         self.addSubview(contentView)
-        
         contentView.addSubview(confirmImage)
         contentView.addSubview(paymentSucessfullLbl)
         contentView.addSubview(amountSentLbl)
@@ -60,19 +71,10 @@ class ConfirmPaymentV: UIView {
         contentView.addSubview(senderName)
         contentView.addSubview(senderAcountNumber)
         contentView.addSubview(shareButton)
-        
         contentView.addSubview(dismissSheetBtn)
-        shareButton.setTitleColor(.black, for: .normal)
         
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        self.dateLbl.text = formatter.string(from: date)
-        
-        dismissSheetBtn.setImage(UIImage(systemName: "xmark"), for: .normal)
-        dismissSheetBtn.tintColor = .black
-        confirmImage.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        confirmImage.tintColor = .white
+        let dateString = ""
+        dateLbl.text = dateString.getDateInString(style: .medium)
         
         NSLayoutConstraint.activate([
             

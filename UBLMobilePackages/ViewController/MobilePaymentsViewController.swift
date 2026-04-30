@@ -11,15 +11,15 @@ class MobilePaymentsViewController: HeaderTitleViewController {
     private let paymentTypesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(PaymentsItemCell.self, forCellWithReuseIdentifier: PaymentsItemCell.identifier)
-        collectionView.allowsSelection = true
-        collectionView.alwaysBounceVertical = true
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        return collectionView
+        let paymentTypesCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        paymentTypesCollectionView.register(PaymentsItemCell.self, forCellWithReuseIdentifier: PaymentsItemCell.identifier)
+        paymentTypesCollectionView.allowsSelection = true
+        paymentTypesCollectionView.alwaysBounceVertical = true
+        paymentTypesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        return paymentTypesCollectionView
     }()
     
-    private let vm = MobilePaymentsVM()
+    private let vm = MobilePaymentsViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()

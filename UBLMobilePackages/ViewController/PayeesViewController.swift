@@ -15,7 +15,6 @@ class PayeesViewController: HeaderTitleViewController {
         addPayeeBtn.setImage(UIImage(systemName: "plus"), for: .normal)
         return addPayeeBtn
     }()
-    
     private let payeesListTableView: UITableView = {
         let myTable = UITableView()
         myTable.allowsSelection = true
@@ -27,7 +26,7 @@ class PayeesViewController: HeaderTitleViewController {
         return myTable
     }()
     
-    private let vm = PayeesVM()
+    private let vm = PayeesViewModel()
     
     var packageModel: NetworkPackageModel?
     init(packageModel: NetworkPackageModel? = nil) {
@@ -44,7 +43,6 @@ class PayeesViewController: HeaderTitleViewController {
     }
     
     func configureUI() {
-        
         titleLbl.text = "Mobile Payees"
         view.addSubview(addPayeeBtn)
         view.addSubview(payeesListTableView)

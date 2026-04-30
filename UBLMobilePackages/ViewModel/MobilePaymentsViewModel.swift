@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MobilePaymentsVM {
+class MobilePaymentsViewModel {
     
     let mobilePaymentsArray: [MobilePaymentsModel] = [
         MobilePaymentsModel(image: UIImage(systemName: "phone")!, title: "Mobile Top Up"),

@@ -16,19 +16,18 @@ class AllPackagesViewController: HeaderTitleViewController {
         segmentedControl.translatesAutoresizingMaskIntoConstraints = false
         return segmentedControl
     }()
-    
     private let packagesTableView: UITableView = {
-        let myTable = UITableView()
-        myTable.rowHeight = 295
-        myTable.allowsSelection = true
-        myTable.separatorStyle = .none
-        myTable.showsVerticalScrollIndicator = false
-        myTable.register(EachNetworkPackageCell.self, forCellReuseIdentifier: EachNetworkPackageCell.identifier)
-        myTable.translatesAutoresizingMaskIntoConstraints = false
-        return myTable
+        let packagesTableView = UITableView()
+        packagesTableView.rowHeight = 295
+        packagesTableView.allowsSelection = true
+        packagesTableView.separatorStyle = .none
+        packagesTableView.showsVerticalScrollIndicator = false
+        packagesTableView.register(AllNetworkPackageCell.self, forCellReuseIdentifier: AllNetworkPackageCell.identifier)
+        packagesTableView.translatesAutoresizingMaskIntoConstraints = false
+        return packagesTableView
     }()
     
-    private let vm = EachNetworkPackagesVM()
+    private let vm = AllPackagesViewModel()
     
     var headerTitleLbl: String?
     init(headerTitleLbl: String? = nil) {
@@ -41,17 +40,15 @@ class AllPackagesViewController: HeaderTitleViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLbl.text = "\(self.headerTitleLbl ?? "") Packages"
         configureUI()
     }
     
     func configureUI() {
-        
+        titleLbl.text = "\(self.headerTitleLbl ?? "") Packages"
         view.addSubview(packagesTableView)
         view.addSubview(packageDurationSegmentedControl)
         packagesTableView.dataSource = self
         packagesTableView.delegate = self
-        
         vm.filterNetworkPackages(selectedIndex: 0, selectedNetwork: self.headerTitleLbl ?? "")
         
         NSLayoutConstraint.activate([
@@ -89,46 +86,18 @@ extension AllPackagesViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = packagesTableView.dequeueReusableCell(withIdentifier: EachNetworkPackageCell.identifier, for: indexPath) as? EachNetworkPackageCell else {
+        guard let cell = packagesTableView.dequeueReusableCell(withIdentifier: AllNetworkPackageCell.identifier, for: indexPath) as? AllNetworkPackageCell else {
             fatalError("Error while dequeue the custom cell...")
         }
-        var item = vm.filteredNetworkPackages[indexPath.row]
         
-        var dataLbl = "Data"
-        var onNetLbl = "OnNet Min"
-        var OtherLbl = "Other Min"
-        var smsLbl = "SMS"
+        let item = vm.filteredNetworkPackages[indexPath.row]
         
-        var includedDataLbl = ", "
-        var includedOnNetLbl = "OnNet, "
-        var includedOtherLbl = "Other, "
-        var includedSmsLbl = "SMS"
+        cell.dataSection.isHidden = item.data?.isEmpty ?? true
+        cell.onNetMinSection.isHidden = item.onNetMin?.isEmpty ?? true
+        cell.otherMinSection.isHidden = item.otherMin?.isEmpty ?? true
+        cell.smsSection.isHidden = item.sms?.isEmpty ?? true
         
-        if item.data == "0" {
-            item.data = ""
-            dataLbl = ""
-            includedDataLbl = ""
-        }
-        if item.onNetMin == "0" {
-            item.onNetMin = ""
-            onNetLbl = ""
-            includedOnNetLbl = ""
-        }
-        if item.otherMin == "0" {
-            item.otherMin = ""
-            OtherLbl = ""
-            includedOtherLbl = ""
-        }
-        if item.sms == "0" {
-            item.sms = ""
-            smsLbl = ""
-            includedSmsLbl = ""
-        }
-        
-        let includedItems = "\(item.data ?? "") \(includedDataLbl) \(item.onNetMin ?? "") \(includedOnNetLbl) \(item.otherMin ?? "") \(includedOtherLbl) \(item.sms ?? "") \(includedSmsLbl)"
-        
-        cell.setupLbl(dataLbl: dataLbl, onNetMinLbl: onNetLbl, otherMin: OtherLbl, smsLbl: smsLbl)
-        
+        let includedItems = vm.manageIncludes(item)
         cell.setupPackageCell(networkType: item.networkType, title: item.title, duration: item.duration, data: item.data ?? "", OnNetMin: item.onNetMin ?? "", otherMin: item.otherMin ?? "", sms: item.sms ?? "", amount: "Rs. \(item.amount)", includedValues: includedItems)
         cell.selectionStyle = .none
         return cell
@@ -140,5 +109,4 @@ extension AllPackagesViewController: UITableViewDelegate, UITableViewDataSource 
         navigationController?.pushViewController(vc, animated: true)
         packagesTableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }

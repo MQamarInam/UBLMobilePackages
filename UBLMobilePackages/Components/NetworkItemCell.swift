@@ -11,7 +11,13 @@ class NetworkItemCell: UITableViewCell {
             
     private let companyItemImage = GenericImage(imageName: UIImage(systemName: "chevron.right")!, contntMode: .scaleAspectFit, tintClr: .systemBlue, bgColor: .clear, cornrRadius: 1)
     private let companyItemTitle = GenericLabel(myfont: .systemFont(ofSize: 16, weight: .semibold), color: .black, backgroundClr: .clear, mytext: "Jazz", myNumberOfLines: 1, clickable: false, txtAlignment: .left, cornerRadius: 0)
-    private let companyItemBackgroundView = UIView()
+    private let companyItemBackgroundView: UIView = {
+        let companyItemBackgroundView = UIView()
+        companyItemBackgroundView.backgroundColor = .gray.withAlphaComponent(0.1)
+        companyItemBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        companyItemBackgroundView.layer.cornerRadius = 20
+        return companyItemBackgroundView
+    }()
     
     static let identifier = "myIdentifier"
     
@@ -27,15 +33,8 @@ class NetworkItemCell: UITableViewCell {
     private func configureUI() {
         
         contentView.addSubview(companyItemBackgroundView)
-        
         companyItemBackgroundView.addSubview(companyItemImage)
         companyItemBackgroundView.addSubview(companyItemTitle)
-        
-        companyItemBackgroundView.backgroundColor = .gray.withAlphaComponent(0.1)
-        companyItemBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        companyItemBackgroundView.layer.cornerRadius = 20
-        
-        contentView.backgroundColor = .clear
         
         NSLayoutConstraint.activate([
             

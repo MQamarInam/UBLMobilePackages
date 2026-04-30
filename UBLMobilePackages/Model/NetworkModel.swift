@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NetworkTypeModel {
+struct NetworkModel {
     
     let name: String
     

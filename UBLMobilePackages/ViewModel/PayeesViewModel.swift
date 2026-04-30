@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PayeesVM {
+class PayeesViewModel {
     
     var payeesArray: [PayeesModel] = [
         PayeesModel(payeeName: "Qamar", number: "03080044493"),

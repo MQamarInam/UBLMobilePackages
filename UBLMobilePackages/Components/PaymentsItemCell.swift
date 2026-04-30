@@ -28,9 +28,7 @@ class PaymentsItemCell: UICollectionViewCell {
         
         contentView.addSubview(paymentItemImage)
         contentView.addSubview(paymentItemLbl)
-        
         contentView.backgroundColor = .gray.withAlphaComponent(0.1)
-        
         contentView.layer.cornerRadius = 20
         
         NSLayoutConstraint.activate([
